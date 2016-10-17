@@ -11,16 +11,15 @@ import javax.persistence.Id;
  */
 @Entity
 public class BookDto {
-	
+
 	/*
 	 * ...67p.@Id 어노테이션을 붙여 엔티티의 유일성을 식별함.
 	 *    @GeneratedValue 어노테이션 : 자동으로 값을 제공함.
 	 */
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)	
     private Long id;
-    
-    //private String reader; //...by87p.
+    //private String reader; //...by87p.    
     private Reader reader;
     private String isbn;
     private String title;
@@ -62,7 +61,6 @@ public class BookDto {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-    
+	}	        
+	
 }

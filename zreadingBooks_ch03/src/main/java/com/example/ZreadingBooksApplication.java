@@ -29,10 +29,9 @@ public class ZreadingBooksApplication extends WebMvcConfigurerAdapter{
 	/*
 	 * ...85p.Reader 타입의 객체가 컨트롤러 매개변수로 있을 때 처리할 리졸버를 설정함.
 	 * 
-	 */	
+	 */		
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-
 		//super.addArgumentResolvers(argumentResolvers);
 		argumentResolvers.add(new ReaderHandlerMethodArgumentResolver());
 	}
@@ -41,13 +40,11 @@ public class ZreadingBooksApplication extends WebMvcConfigurerAdapter{
 	 * ...85p.login 요청 경로를 받으면 로그인 페이지를 보여줌.
 	 *    addViewControllers 에서 login 요청 경로를 login 템플릿으로 매핑함.
 	 *    
-	 */	
+	 */		
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-
 		//super.addViewControllers(registry);
 		registry.addViewController("/login").setViewName("login");
-		
 	}
 	
 	

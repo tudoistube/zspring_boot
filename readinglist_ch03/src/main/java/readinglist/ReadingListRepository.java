@@ -12,6 +12,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * ...87p.JpaRepository 를 상속받으므로 구현 코드를 별도로 작성할 필요는 없음.
  */
 public interface ReadingListRepository extends JpaRepository<Book, Long> {
+	
+	/*
+	 * ...추측.JPA의 특성인지 findBy+"DtoObjName"의 형식으로 데이터를 자동으로
+	 *    조회할 수 있는 것 같음. 
+	 */	
 	//List<BookDto> findByReader(String reader); //...by87p.	
     List<Book> findByReader(Reader reader);
 }

@@ -27,39 +27,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		//super.configure(auth);
+		
 		//...83p.사용자 정의 UserDetailService.
-		auth.userDetailsService(
-					new UserDetailsService() {
-						
-						@Override
-						public UserDetails loadUserByUsername(String username) 
-								throws UsernameNotFoundException {
+		auth.userDetailsService(new UserDetailsService(){
+				@Override
+				public UserDetails loadUserByUsername(String username) 
+						throws UsernameNotFoundException {
+					return (UserDetails) readerRepository.findOne(username);
+				}
+			});
 
-							return (UserDetails) readerRepository.findOne(username);
-							
-						}
-					}
-				);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		//super.configure(http);
+		
+		http.authorizeRequests()
 		/*
 		 * ...83p.READER 권한 필요.
 		 *    "/" 요청 경로에는 READER 롤이 있는 인증된 사용자만 요청함.
 		 *    "/" 요청 경로외에는 별도 인증없이 허용함.
 		 */
-		http.authorizeRequests()
 			.antMatchers("/").access("hasRole('READER')")
 			.antMatchers("/**").permitAll()
 			.and()
 			//...83p. 로그인 폼 경로 설정.
 			.formLogin().loginPage("/login")
 						.failureUrl("/login?error=true");
+
 	}
 	
 	

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/")
 public class ReadingListController {
-
+	
 	//private static final String reader = "JoyWins"; //...by86p.
 	
 	private ReadingListJpaRepository readingListJpaRepository;
@@ -24,29 +24,29 @@ public class ReadingListController {
 	/*
 	 * ...69p.생성자에 리포지터리를 주입함.
 	 */
-	@Autowired	
+	@Autowired
 	public ReadingListController(ReadingListJpaRepository readingListJpaRepository) {
-		//super();
 		this.readingListJpaRepository = readingListJpaRepository;
 	}
 	
+
 	/*
 	 * ...69p.독자의 Book 리스트를 생성자에 주입된 리포지터리에서 조회함.
-	 */
-	@RequestMapping(method=RequestMethod.GET)
+	 */    
+	@RequestMapping(method = RequestMethod.GET)
 	//public String readersBooks(Model model){ //...by87p.	
 	public String readersBooks(Reader reader, Model model){
 		
-		List<BookDto> readingList = readingListJpaRepository.findByReader(reader);
+		List<BookDto> readingList = readingListJpaRepository.getReadingListByReader(reader);
 		
 		if(readingList != null){
 			model.addAttribute("books", readingList);
-			model.addAttribute("reader", reader);//...87p.added.
-		}
+			model.addAttribute("reader", reader);//...87p.added.사용자정보.
+		}		
 		
-		return "readingList";
+		return "readingList";		
 	}
-	
+
 	/*
 	 * ...69p.BookDto 의 reader 프로퍼티를 독자의 이름으로 설정하고 리포지터리의
 	 *    save() 메서드를 이용하여 저장함.
@@ -58,11 +58,11 @@ public class ReadingListController {
 	public String addToReadingList(Reader reader, BookDto book){
 		
 		book.setReader(reader);
-		
 		readingListJpaRepository.save(book);
 		
 		return "redirect:/";
 		
 	}
 	
+
 }

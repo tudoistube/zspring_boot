@@ -6,11 +6,13 @@
 	<title>Reading List</title>
 </head>
 <body>
+  <!-- ...S.91p.로그아웃버튼 및 로그인 사용자 이름 표시. -->
   <form method="POST" th:action="@{/logout}">
     <input type="submit" value="Logout" />
   </form>
   
-  <h2><span th:text="${ch03reader.fullname}">Name</span>'s Reading List</h2>
+  <h2><span th:text="${reader.fullname}">Name</span>'s Reading List</h2>
+  <!-- ...E.91p.로그아웃버튼 및 로그인 사용자 이름 표시. -->
   <div th:unless="${#lists.isEmpty(books)}">
     <dl th:each="book : ${books}">
       <dt class="bookHeadline">
