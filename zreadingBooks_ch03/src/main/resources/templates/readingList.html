@@ -16,7 +16,14 @@
   <div th:unless="${#lists.isEmpty(books)}">
     <dl th:each="book : ${books}">
       <dt class="bookHeadline">
-        <span th:text="${book.title}">Title</span> by
+      
+      <!-- ...S.103p.외부에서 애플리케이션 빈 구성하기. -->
+        <a th:href="'http://www.amazon.com/gp/product/'
+          + ${book.isbn}
+          + '/tag=' + ${associateId}"
+          th:text="${book.title}">Title</a> by
+      <!-- ...E.103p.외부에서 애플리케이션 빈 구성하기. -->
+        
         <span th:text="${book.author}">Author</span>
         (ISBN: <span th:text="${book.isbn}">ISBN</span>)
       </dt>
@@ -36,7 +43,7 @@
     	
   <!-- ...70p.↑: 독자의 도서목록 / ↓: 새로운 책을 독자의 목록에 추가함. -->    	
     	
-  <h3>Add a book</h3>
+  <h3>Add a book...</h3>
   <form method="POST" th:action="@{/}">
   
     <label for="title">Title:</label>

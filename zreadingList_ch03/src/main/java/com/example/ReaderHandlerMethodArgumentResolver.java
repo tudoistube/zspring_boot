@@ -1,3 +1,6 @@
+/*
+ * ...85p.ReaderDto 타입의 컨트롤러 매개변수를 처리하는 인자 리졸버.
+ */
 package com.example;
 
 import org.springframework.core.MethodParameter;

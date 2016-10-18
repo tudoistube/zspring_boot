@@ -5,15 +5,24 @@
 	<title>Reading List</title>
 </head>
 <body>
+  <!-- ...S.91p.로그아웃버튼 및 로그인 사용자 이름 표시. -->
   <form method="POST" th:action="@{/logout}">
     <input type="submit" value="Logout" />
   </form>
   
   <h2><span th:text="${reader.fullname}">Name</span>'s Reading List</h2>
+  <!-- ...E.91p.로그아웃버튼 및 로그인 사용자 이름 표시. -->
   <div th:unless="${#lists.isEmpty(books)}">
     <dl th:each="book : ${books}">
       <dt class="bookHeadline">
-        <span th:text="${book.title}">Title</span> by
+      
+      <!-- ...S.103p.외부에서 애플리케이션 빈 구성하기. -->
+        <a th:href="'http://www.amazon.com/gp/product/'
+          + ${book.isbn}
+          + '/tag=' + ${associateId}"
+          th:text="${book.title}">Title</a> by
+      <!-- ...E.103p.외부에서 애플리케이션 빈 구성하기. -->
+        
         <span th:text="${book.author}">Author</span>
         (ISBN: <span th:text="${book.isbn}">ISBN</span>)
       </dt>

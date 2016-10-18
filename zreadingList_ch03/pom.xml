@@ -54,6 +54,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- ...S.107p.AmazonProperties 빈 사용으로 주석 처리. -->
+		<dependency><!--...S.104p.@ConfigurationProperties. -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency><!--...E.104p.@ConfigurationProperties. -->
+		<!--...S.107p.AmazonProperties 빈 사용으로 주석 처리. -->		
 	</dependencies>
 
 	<build>

@@ -30,11 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//...83p.사용자 정의 UserDetailService.
 		auth.userDetailsService(new UserDetailsService(){
+			
 				@Override
 				public UserDetails loadUserByUsername(String username) 
 						throws UsernameNotFoundException {
+					
 					return (UserDetails) readerRepository.findOne(username);
 				}
+				
 			});
 
 	}

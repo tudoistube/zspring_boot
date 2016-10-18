@@ -1,0 +1,7 @@
+spring:
+  thymeleaf:
+    cache: true    
+    
+amazon:
+  associateId: habuma-20
+  
