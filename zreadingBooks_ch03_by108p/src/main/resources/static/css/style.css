@@ -1,3 +1,5 @@
+/*...71p */
+
 body{
 	background-color: #cccccc;
 	font-family: arial, helvetica, sans-serif;
@@ -14,16 +16,4 @@ body{
 
 label{
 	font-weight: bold;
-}
-
-.error {
-    color: red;
-}
-
-.errorPage {
-    text-align: center;
-}
-
-.oops {
-    font-size: 76pt;
 }

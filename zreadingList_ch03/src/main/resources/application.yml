@@ -3,3 +3,12 @@ server:
   
 amazon:
   associateId: habuma-20
+  
+---
+  
+spring:
+  profiles: development
+  
+logging:
+  level:
+    root: error

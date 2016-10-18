@@ -6,6 +6,7 @@ package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +15,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+
+/*
+ * ...108p.프로파일은 다른 빈이나 구성 클래스를 런타임에 활성화된 프로파일을 기반으로
+ *    사용하거나 무시하는 조건부 구성 타입임.
+ *    예) 보안구성을 출시 환경에서만 사용하게 하고, 개발 환경에서는 자동으로 구성된
+ *        보안 구성을 사용함.
+ *        'production' 은 application.yml 에 정의되어 있음.
+ *        application.properties 파일에는 spring.profiles.active=production 으로 
+ *        설정되있음.
+ *    application-{profile}.properties, application-{profile}.yml 형태로 추가적인
+ *    프로퍼티 파일을 생성하고, 공통적인 프로퍼티는 application.properties,
+ *    application.yml 에 정의함.
+ *    YAML 파일을 이용하면 application.yml 파일 하나에 모든 프로파일의 구성 프로퍼티를
+ *    담을 수 있음.
+ *     
+ */
+//@Profile("production")
 /*
  * ...84p.Customised 정의 보안 구성 클래스를 선언하면, 스프링 부트는 보안 자동 구성을
  *    건너뛴 채 사용자 정의 보안 구성을 사용함.
