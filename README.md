@@ -1,4 +1,4 @@
-#SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 116p)  JpaRepository를 상속한 클래스와 DTO 클래스에 대한 JPA의 이름 특성에 대해 확인이 필요함.  
+#SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 127p)  @SpringApplicationConfiguration 를 사용해서 통합 테스트를 함. MockMvcBuilders 를 사용하여 webAppContextSetup() 메서드를 사용함.  
 #[...](https://localhost:8080 "... Summary by tudoistube@gmail.com" )  
 
 

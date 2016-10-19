@@ -1,5 +1,0 @@
-server:
-  port: 8888
-  
-amazon:
-  associateId: habuma-20
