@@ -1,5 +1,21 @@
 package com.example;
 
+/*
+ * ...125p.정적 임포트 추가.
+ */
+
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,7 +67,7 @@ import org.springframework.web.context.WebApplicationContext;
  *    아니라 WebApplicationContext 를 생성하도록 선언함. 
  */
 @WebAppConfiguration
-public class ZreadingBooksApplicationTests_by124p {
+public class MockMvcWebTests {
 	
 	@Autowired
 	private WebApplicationContext webContext;
@@ -84,12 +101,58 @@ public class ZreadingBooksApplicationTests_by124p {
 	public void homePage() throws Exception{
 		/*
 		 * ...124p. 간단한 '/'로 HTTP GET 요청을 수행하고 기대한 모델과 뷰를 반환하는지 검증함.
-		 */
+		 * ...before : 정적 임포트 추가.
+		 *
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/"))
 				    .andExpect(MockMvcResultMatchers.status().isOk())
 				    .andExpect(MockMvcResultMatchers.view().name("readingList"))
 				    .andExpect(MockMvcResultMatchers.model().attributeExists("books"))
 				    .andExpect(MockMvcResultMatchers.model().attribute("books", Matchers.empty()));
+		*/
+		/*
+		 *...after : 정적 임포트 추가.
+		 *   먼저 '/'에서 GET 요청을 수행함.
+		 *   요청이 성공(isOk() 메서드는 HTTP 200 응답 코드를 검증함)하고
+		 *   응답 뷰의 논리적 이름이 'readingList' 인지 확인하고
+		 *   모델에 'books' 속성을 포함하는지 확인하고
+		 *   이 속성이 빈 컬렉션임을 검증함.
+		 *           
+		 */
+		this.mockMvc.perform(get("/"))
+				    .andExpect(status().isOk())
+				    .andExpect(view().name("readingList"))
+				    .andExpect(model().attributeExists("books"))
+				    .andExpect(model().attribute("books", empty()));		
+	}
+	
+	@Test
+	public void postHome() throws Exception{
+		//...POST 요청 수행.
+		this.mockMvc.perform(post("/").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+									  .param("title", "JoyWins")
+									  .param("author", "2Be")
+									  .param("isbn", "1234567890")
+									  .param("description", "Direction wins over Speed!"))
+					.andExpect(status().is3xxRedirection())
+					.andExpect(header().string("Location", "/"));
+		
+		//...생성할 책 정보 설정.
+		BookDto expectedBook = new BookDto();
+		expectedBook.setId(1L);
+		expectedBook.setReader("2Be");
+		expectedBook.setTitle("JoyWins");
+		expectedBook.setAuthor("2Be");
+		expectedBook.setIsbn("1234567890");
+		expectedBook.setDescription("Direction wins over Speed!");
+		
+		//...POST 요청 수행.
+		this.mockMvc.perform(get("/"))
+		    .andExpect(status().isOk())
+		    .andExpect(view().name("readingList"))
+		    .andExpect(model().attributeExists("books"))
+		    .andExpect(model().attribute("books", hasSize(1)))
+		    .andExpect(model().attribute("books", contains(samePropertyValuesAs(expectedBook))));
+		
 	}
 
 }

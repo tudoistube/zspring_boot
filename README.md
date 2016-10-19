@@ -1,5 +1,9 @@
-#SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 127p)  @SpringApplicationConfiguration 를 사용해서 통합 테스트를 함. MockMvcBuilders 를 사용하여 webAppContextSetup() 메서드를 사용함.  
-#[...](https://localhost:8080 "... Summary by tudoistube@gmail.com" )  
+#SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 141p)  
+##@SpringApplicationConfiguration 를 사용해서 통합 테스트를 함. MockMvcBuilders 를 사용하여 webAppContextSetup() 메서드를 사용함. 
+##@WithMockUser, @WithUserDetail 어노테이션 이용한 인증된 요청 테스트.
+##@WebIntegrationTest 어노테이션 + @Value + RestTemplate.getForObject 이용한 서버실행하기(정리못함).  
+##Selenium 이용한 HTML 페이지 테스트(정리못함)  
+#[unlink](https://localhost:8080 "... Summary by tudoistube@gmail.com" )  
 
 
 책 보면서 실습한 소스임.  

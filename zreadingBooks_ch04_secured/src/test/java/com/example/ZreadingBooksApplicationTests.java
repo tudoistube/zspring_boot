@@ -16,7 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes=ZreadingBooksApplication.class)
 @WebAppConfiguration
-public class ZreadingBooksApplicationTests_plain {
+public class ZreadingBooksApplicationTests {
 
 	@Test
 	public void contextLoads() {

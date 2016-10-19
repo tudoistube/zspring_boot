@@ -1,0 +1,28 @@
+spring:
+  thymeleaf:
+    cache: true
+    
+amazon:
+  associateId: habuma-20
+  
+logging:
+  level:
+    root: info
+    
+---
+
+spring:
+  profiles: development
+logging:
+  level:
+    root: debug
+    
+---
+
+spring:
+  profiles: production
+logging:
+  path: /tmp/
+  file: BookWorm.log
+  level:
+    root: WARN    
