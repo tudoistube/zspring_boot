@@ -1,8 +1,5 @@
-#SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 141p)  
-##@SpringApplicationConfiguration 를 사용해서 통합 테스트를 함. MockMvcBuilders 를 사용하여 webAppContextSetup() 메서드를 사용함. 
-##@WithMockUser, @WithUserDetail 어노테이션 이용한 인증된 요청 테스트.
-##@WebIntegrationTest 어노테이션 + @Value + RestTemplate.getForObject 이용한 서버실행하기(정리못함).  
-##Selenium 이용한 HTML 페이지 테스트(정리못함)  
+#SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 225p)  
+##Ch07 :: 액츄에이터 및 사용자 정의 엑츄에이터.   
 #[unlink](https://localhost:8080 "... Summary by tudoistube@gmail.com" )  
 
 
