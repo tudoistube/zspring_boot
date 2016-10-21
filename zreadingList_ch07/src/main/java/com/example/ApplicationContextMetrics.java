@@ -1,5 +1,13 @@
 package com.example;
-//...224p. 사용자 정의 메트릭 구현.
+/*
+ * ...224p. 사용자 정의 메트릭 구현.
+ *    엑츄에이터는 metircs() 메서드를 호출해서 ApplicationContextMetrics 가 제공하는 
+ *    사용자 정의 메트릭을 수집함.
+ *    metrics() 메서드는 주입받은 ApplicationContext 의 메서드를 호출하여 메트릭에
+ *    보고할 숫자를 조회함.
+ *    각 메서드는 메트릭 이름과 값을 지정하는 Metric 인스턴스를 생성하여 반환될 리스트에
+ *    Metric 을 추가함.
+ */
 
 import java.util.ArrayList;
 import java.util.Collection;

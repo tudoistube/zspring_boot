@@ -9,6 +9,10 @@ info:
       Email: 2Be@2Do.wins
       Email2: tudoistube@ymail.com
       phone: 82-10-2345-6789
+      
+#...234p.      
+management:
+  context-path: /zmgmt      
   
 ---
   

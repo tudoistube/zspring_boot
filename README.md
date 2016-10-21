@@ -1,5 +1,5 @@
 #SpringBoot 코딩공작소 책 공부하며 만든 실습예제(by 225p)  
-##Ch07 :: 액츄에이터 및 사용자 정의 엑츄에이터.   
+##Ch07 :: 액츄에이터, 사용자 정의 엑츄에이터, 엑츄에이터 보안.  
 #[unlink](https://localhost:8080 "... Summary by tudoistube@gmail.com" )  
 
 

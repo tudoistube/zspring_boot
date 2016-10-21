@@ -36,9 +36,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * ...84p.Customised 정의 보안 구성 클래스를 선언하면, 스프링 부트는 보안 자동 구성을
  *    건너뛴 채 사용자 정의 보안 구성을 사용함.
  */
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//@Configuration
+//@EnableWebSecurity
+public class SecurityConfig_by232p extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private ReaderRepository readerRepository;
@@ -46,11 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) 
 			throws Exception {
-		/*
-		 * ...232p. 인메모리 ADMIN 인증 사용자 추가.
-		 * 
-		 * before : 
-		 *
+
 		//...83p.사용자 정의 UserDetailService.		
 		auth.userDetailsService(new UserDetailsService(){
 
@@ -62,26 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			}
 			
 		});
-		 *
-		 * after : 
-		 */
-		
-        auth.userDetailsService(new UserDetailsService() {
-	            @Override
-	            public UserDetails loadUserByUsername(String username)
-	                    throws UsernameNotFoundException {
-	            	UserDetails user = readerRepository.findOne(username);
-	            	
-	                if (user != null) {
-	                    return user;
-	                }
-	                throw new UsernameNotFoundException("User '" + username + "' not found.");
-	            }
-	        })
-	        .and()
-	        .inMemoryAuthentication()
-	            .withUser("admin").password("s3cr3t")
-	            .roles("ADMIN", "READER");		
+			
 		
 	}
 
@@ -95,20 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 *    "/" 요청 경로외에는 별도 인증없이 허용함.
 		 */
 		http.authorizeRequests()
-			.antMatchers("/").access("hasRole('READER')")			
-			//.antMatchers("/shutdown").access("hasRole('ADMIN')")//...231p.ADMIN 권한 필요.
-			/*
-			 * ...234p.일부 엑추에이터 엔드포인트에 접근을 아래와 같이 명시적으로 제한하는 방법이
-			 *    .antMatchers("/shutdown", "/metrics", "/configprops").access("hasRole('ADMIN')")
-			 *    있으나, application.yml 또는 application.properties 에서 
-			 *    management.context-path=/zmgmt 로 설정하여 모든 엑추에이터 엔드포인트에 대한 접근을
-			 *    /zmgmt 경로로 시작하게 하고, 와일드 카드를 사용해서 '/zmgmt/**' 에 대한 모든 접근을
-			 *    ADMIN 권한이 필요하게 함.
-			 *    모든 엑츄에이터 엔드포인트를 포함하여 /zmgmt 로 시작하는 요청은 모두 ADMIN 접근
-			 *    권한을 가진 사용자 인증을 요구함. 
-			 *    
-			 */
-			.antMatchers("/zmgmt/**").access("hasRole('ADMIN')")//...234p.ADMIN 권한 필요.
+			.antMatchers("/").access("hasRole('READER')")
 			.antMatchers("/**").permitAll()
 			.and()
 			//...83p. 로그인 폼 경로 설정.			
@@ -116,6 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.failureUrl("/login?error=true");
 
 	}
+
 	
 	
 }

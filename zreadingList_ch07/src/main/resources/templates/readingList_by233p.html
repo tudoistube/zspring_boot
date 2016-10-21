@@ -10,13 +10,7 @@
     <input type="submit" value="Logout" />
   </form>
   
-
-  <h2>
-  <!-- ...233p./shutdown 엔드포인트는 ADMIN 권한이 있는 사용자가 아니면 접근할 수 없음.
-  	<span th:text="${reader.fullname}">Name</span>'s Reading List  
-   -->  
-  	<span th:text="${reader != null} ? ${reader.fullname} : 'Admin'">Name</span>'s Reading List
-  </h2>
+  <h2><span th:text="${reader.fullname}">Name</span>'s Reading List</h2>
   <!-- ...E.91p.로그아웃버튼 및 로그인 사용자 이름 표시. -->
   <div th:unless="${#lists.isEmpty(books)}">
     <dl th:each="book : ${books}">
