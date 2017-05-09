@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  
+
+<head>
+
+<!-- ...S.105p.Bootstrap CDN -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- ...E.105p.Bootstrap CDN -->
+
+<meta charset="UTF-8">
+<title>...108p.Thyemeleaf에서 th:with를 이용한 특정한 범위에서만 유효한 지역변수로  if ~unless 제어 처리.</title>
+</head>
+<body>
+
+  <h3>...108p.Thyemeleaf에서 th:with를 이용한 특정한 범위에서만 유효한 지역변수로</h3>  
+  <h3>if ~unless 제어 처리.</h3>
+  
+<!-- ...106p.리스트를 화면에 출력하기. 
+             템플릿으로 가장 많이 사용하는 루프를 처리해야하는 상황에서는 
+             th:each를 이용해서 처리할 수 있음.   
+ -->
+
+
+	<table class="table table-striped">
+	  <thead>
+		<tr>
+		  <th>mid</th>
+		  <th>mname</th>
+		  <th>regdate</th>
+		</tr>
+	  </thead>
+
+<!-- ...108p.지역변수의 선언, if ~unless 제어 처리 :
+             Thyemeleaf에서는 특정한 범위에서만 유효한 지역변수를 th:with를 이용해서 
+             선언할 수 있음.  
+             th:with를 이용해서 currentWriter라는 이름의 변수를 작성함. 
+             이 변수는 <tbody>태그 내에서만 유효한 지역변수가 됨.
+             
+             만일 currentUser가 ‘5’라는 값을 가지고, mname컬럼의 값에 ‘5’라는 글자가 
+             포함된 경우에만 추가적으로 ‘modify’라는 링크가 보여질 필요가 있다면 다음과 
+             같은 형태로 작성됨.
+             
+			 th:if의 경우에는 안쪽의 식(expression)이 결과가 있어야만 th:if를 포함하는 
+			 태그 자체가 생성됨. 
+			 #strings는 Thymeleaf가 제공하는 문자열 유틸리티 객체임.
+			 위의 코드가 적용되면 화면에서는 ‘5’가 포함된 행만이 ‘modify’라는 추가 
+			 링크를 가지게 됨.              
+ -->	  
+	  <tbody th:with="currentWriter='5'">
+	
+		<tr th:each="member,iterStat : ${list}" 
+		    th:class="${iterStat.odd}? 'odd'">
+		    
+		  <td th:text="${iterStat.index}"></td>
+		  <td th:text="${iterStat.size}"></td>
+		  <td th:text="${member.mid}"></td>
+		  
+		  <td><span th:text="${member.mname +' : '+ currentWriter}"></span>
+            <a href='...'
+               th:if="${#strings.contains(member.mname, currentWriter)}">modify</a>
+<!-- ...110p.th:if와 더불어 th:unless는 if조건에 만족하지 않는 경우에 적용할 수 있음. 
+             예를 들어 ‘5’라는 문자가 포함되지 않은 경우에는 다른 문자를 보여주고 싶다면 
+             다음과 같이 적용됨. 
+ -->
+            <a href='...'
+               th:unless="${#strings.contains(member.mname, currentWriter)}">view</a>
+          </td>
+          
+		  <td th:text="${#dates.format(member.regdate, 'yyyy-MM-dd')}"></td>
+		</tr>
+		
+	  </tbody>
+	</table>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  
+
+<head>
+
+<!-- ...S.105p.Bootstrap CDN -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- jQuery library -->
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- ...E.105p.Bootstrap CDN -->
+
+<meta charset="UTF-8">
+<title>...108p.Thyemeleaf에서 th:with를 이용한 특정한 범위에서만 유효한 지역변수로  if ~unless 제어 처리.</title>
+</head>
+<body>
+
+  <h3>...108p.Thyemeleaf에서 th:with를 이용한 특정한 범위에서만 유효한 지역변수로</h3>  
+  <h3>if ~unless 제어 처리.</h3>
+  
+<!-- ...111p.인라인 스타일로 Thymeleaf 사용하기.  
+             JSP페이지를 작성하다보면 가끔은 EL을 이용해서 자바스크립트 코드를 
+             작성하는 경우, Thymeleaf에서는 이러한 경우에 별도의 표기방법을 지원함. 
+             th:inline이라는 것을 이용해서 ‘javascript’나 ‘text’를 지정해서 사용함.
+ -->
+
+
+	<table class="table table-striped">
+	  <thead>
+		<tr>
+		  <th>mid</th>
+		  <th>mname</th>
+		  <th>regdate</th>
+		</tr>
+	  </thead>
+	  
+	  <tbody th:with="currentWriter='5'">
+	
+		<tr th:each="member,iterStat : ${list}" 
+		    th:class="${iterStat.odd}? 'odd'">
+		    
+		  <td th:text="${iterStat.index}"></td>
+		  <td th:text="${iterStat.size}"></td>
+		  <td th:text="${member.mid}"></td>
+		  
+		  <td><span th:text="${member.mname +' : '+ currentWriter}"></span>
+            <a href='...'
+               th:if="${#strings.contains(member.mname, currentWriter)}">modify</a>
+            <a href='...'
+               th:unless="${#strings.contains(member.mname, currentWriter)}">view</a>
+          </td>
+          
+		  <td th:text="${#dates.format(member.regdate, 'yyyy-MM-dd')}"></td>
+		</tr>
+		
+	  </tbody>
+	</table>
+
+
+
+<script th:inline="javascript">
+/* ...111p.th:inline을 이용해서 <script> 태그 내에서 Thymeleaf를 사용한다는 것을 명시함.
+           이 속성을 적용하지 않으면 문자열이 그냥 변수명과 같이 처리될 수 있으므로 
+           주의해야 함.
+           
+           아래 코드가 브라우저에서는 다음과 같은 자바스크립트로 변환하게 됨.
+            
+           만들어진 코드를 보면 자동으로 자바스크립트의 문자열로 result변수가 작성되는 
+           것을 볼 수 있음.
+           
+           $(document).ready(function(){
+        	   
+        	   var result = "SUCCESS";
+        	   
+        	   if(result == 'SUCCESS'){
+        	     alert("성공");
+        	   }else{
+        	     alert("실패");
+        	   }
+        	 });
+ */
+
+
+	$(document).ready(function(){
+	  
+	  var result = [[${result}]];
+	  
+	  if(result == 'SUCCESS'){
+	    alert("성공");
+	  }else{
+	    alert("실패");
+	  }
+	  
+	});
+
+</script>
+</body>
+</html>

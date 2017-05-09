@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- ...118p.Thymeleaf layout dialect를 이용한 레이아웃 재사용하는 sample8.html.
+             상단의 layout:decorator속성의 값으로는 자신이 사용하고자하는 레이아웃 
+             템플릿을 적용함.-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{zbootstrap/layout}">
+
+<!-- ...118p.layout:fragment 속성을 이용해서 zbootstrap 폴더의 layout.html파일의 
+             content부분만을 변경하는 방식임. -->
+<div layout:fragment="content">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>[[${page_title}]]</h2>
+      <h5>...114p.Thymeleaf layout dialect를 이용한 레이아웃 재사용하기.</h5>
+
+    </div>
+  </div>
+
+</div>
+
+</html>

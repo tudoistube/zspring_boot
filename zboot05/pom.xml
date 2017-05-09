@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>yes.joywins</groupId>
+	<artifactId>zboot05</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>zboot05</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+<!-- ...115p.Thymeleaf layout dialect를 이용한 레이아웃 재사용하기 : 
+             Thymeleaf의 기본으로 포함되지 않지만, Thymeleaf layou dialect를 이용하면, 
+             하나의 레이아웃을 작성한 뒤 재사용해서 여러 페이지에서 동일한 레이아웃을 
+             적용시킬 수 있음. 
+             흔히 템플릿 상속이라고 하기도 하는데, 현재 필요한 부분만 작성하면 되므로, 
+             보다 깔끔한 코드를 유지할 수 있음. 
+             https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
+             
+             책의 예제를 위해서 무료로 사용할 수 있는 디자인 중에서 Binary Bootstrap Admin 
+             디자인을 적용할 것임.(https://www.bootstrapzero.com/bootstrap-template/binary).
+             
+             링크를 통해서 압축파일을 다운로드 받아서 html파일들을 살펴보면 아래와 같은 모양을 
+             볼 수 있음.
+             
+             assets폴더는 이미지와 CSS파일, JavaScript파일들이 들어있는 폴더임.  
+             
+             위의 페이지에서 화면 왼쪽의 <nav>부분과 실제 페이지의 내용 부분 <footer>부분을 
+             별도의 조각으로 만들어서 처리하도록 작업함.
+             우선 레이아웃용 페이지를 위해서 /src/main/resources/templates/zbootstrap 폴더를 
+             생성함. 
+             
+             /zboot05/src/main/resources/static 폴더에 다운로드받은 assets 폴더를 복사해서
+             넣어줌.
+             
+             작성된 zbootstrap 폴더에 layout.html파일을 생성하고, 다운받은 템플릿 페이지중의 
+             하나인 index.html의 코드를 그대로 넣어줌.
+             
+               
+             
+               
+-->
+		<dependency>
+		    <groupId>nz.net.ultraq.thymeleaf</groupId>
+		    <artifactId>thymeleaf-layout-dialect</artifactId>
+		    <version>2.2.1</version>
+		</dependency>
+				
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+</project>

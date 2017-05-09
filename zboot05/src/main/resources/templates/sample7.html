@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  
+
+<head>
+
+	<!-- ...S.105p.Bootstrap CDN -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<!-- jQuery library -->
+	<script
+	  src="https://code.jquery.com/jquery-1.12.4.min.js"
+	  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	  crossorigin="anonymous"></script>
+	  
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- ...E.105p.Bootstrap CDN -->
+	
+	<meta charset="UTF-8">
+	<title>...113p.Thymeleaf의 레이아웃 기능.</title>
+</head>
+
+<body>
+
+  <div th:insert="~{zlayouts/header::header}"></div>
+
+  <h3>...113p.Thymeleaf의 레이아웃 기능.</h3>
+  
+<!-- ...111p.인라인 스타일로 Thymeleaf 사용하기.  
+             JSP페이지를 작성하다보면 가끔은 EL을 이용해서 자바스크립트 코드를 
+             작성하는 경우, Thymeleaf에서는 이러한 경우에 별도의 표기방법을 지원함. 
+             th:inline이라는 것을 이용해서 ‘javascript’나 ‘text’를 지정해서 사용함.
+ -->
+
+	<div class="container">
+	 
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>mid</th>
+			  <th>mname</th>
+			  <th>regdate</th>
+			</tr>
+		  </thead>
+	
+		  <tbody th:with="currentWriter='5'" th:inline="text">
+	      
+	        <tr th:each="member,iterStat : ${list}" class="[[${iterStat.odd}? 'odd':'']]">
+	          <td>[[${iterStat.index}]]</td>
+	          <td>[[${iterStat.size}]]</td>
+	          <td>[[${member.mno}]]</td>
+	          <td >
+	            <span>[[${member.mname}]]</span> 
+	            <a href='...' 
+	            	th:if="${#strings.contains(member.mname,currentWriter)}" >modify</a>
+	            <a href='...'
+	               	th:unless="${#strings.contains(member.mname, currentWriter)}">view</a>            
+	          </td>
+	          <td>[[${#dates.format(member.regdate, 'yyyy-MM-dd')}]]</td>
+	        </tr>
+	        
+	      </tbody>
+		</table>	
+	
+	</div>
+
+  <div th:insert="~{zlayouts/footer::footer}"></div>
+
+</body>
+</html>

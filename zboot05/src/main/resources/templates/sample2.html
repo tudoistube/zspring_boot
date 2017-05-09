@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<!-- ...105p.객체를 화면에 출력하기. 
+ -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- ...102p.이클립스에 Thymeleaf플러그인 설치하기 : 
+             작성되는 sample2.html은 기본적인 CSS를 적용하기 위해서 
+             http://getbootstrap.com/getting-started/ 를 이용해서 
+             코드에 필요한 스타일을 적용하도록 함. 
+ -->
+  
+
+<head>
+
+<!-- ...S.105p.Bootstrap CDN -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- ...E.105p.Bootstrap CDN -->
+
+<meta charset="UTF-8">
+<title>...105p.Thymeleaf 와 Bootstrap 를 사용하여 객체를 화면에 출력하기.</title>
+</head>
+<body>
+
+  <h3>...105p.Thymeleaf 와 Bootstrap 를 사용하여 객체를 화면에 출력하기.</h1>
+
+  <div class="container">
+    <div class="form-group">
+      <label>MNO:</label> <input type="text" class="form-control" th:value="${vo.mno}">
+    </div>
+    <div class="form-group">
+      <label>MID:</label> <input type="text" class="form-control" th:value="${vo.mid}">
+    </div>
+    <div class="form-group">
+      <label>MName:</label> <p th:text="${vo.mname}"></p>
+    </div>          
+    <div class="form-group">
+      <label>RegDate:</label> <p th:text="${vo.regdate}"></p>
+    </div>
+    <div class="form-group">
+<!-- ...106p.흥미로운 부분은 Thymeleaf를 이용해서 ‘#dates.format’을 이용할 수 있음. 
+             단순한 표현식으로 날짜를 처리할 수 있음. 
+             이 때 사용하는 #dates는 Thymeleaf의 유틸리티 객체임. 
+ -->      
+      <label>RegDate:</label> <p th:text="${#dates.format(vo.regdate, 'yyyy-MM-dd')}"></p>
+    </div>
+  </div>
+
+</body>
+</html>
